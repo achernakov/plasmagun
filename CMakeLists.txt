@@ -1,4 +1,4 @@
-set (SOURCES_LIST src/main.cpp)
+set (SOURCES_LIST src/main.cpp src/infiniium/net.cpp)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--export-dynamic -rdynamic")
 project(plasmagun)
 cmake_minimum_required(VERSION 2.6)
