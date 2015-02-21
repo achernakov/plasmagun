@@ -1,9 +1,5 @@
 #pragma once
 
-/*#include <sys/socket.h>
-#include <sys/types/h>
-#include <sys/netdb.h>*/
-
 class NetClnt {
 	public:
 		NetClnt ();

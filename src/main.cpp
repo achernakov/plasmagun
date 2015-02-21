@@ -1,4 +1,6 @@
-#include <gtk/gtk.h>
+
+#include "stdafx.h"
+#include "infiniium/net.h"
 
 /* This is a callback function. The data arguments are ignored
  * in this example. More on callbacks below.
@@ -7,7 +9,14 @@ static void
 print_hello (GtkWidget *widget,
              gpointer   data)
 {
-  g_print ("Hello World\n");
+ // g_print ("Hello World\n");
+  NetClnt net;
+  net.connect("google.com", "http");
+  net.sendString("GET / HTTP/1.0\r\n\r\n");
+  std::string resp;
+  net.recvString(resp);
+  g_print(resp.c_str());
+  net.disconnect();
 }
 
 static gboolean
