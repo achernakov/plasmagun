@@ -5,6 +5,8 @@ namespace Plasma {
 
 	Window::Window (const std::string & uiXmlPath) {
 		loadUiXml(uiXmlPath);
+		g_signal_connect (this->operator[]("main_window"), "destroy",
+			G_CALLBACK(gtk_main_quit), NULL);
 	}
 
 	void Window::loadUiXml (const std::string & uiXmlPath) {

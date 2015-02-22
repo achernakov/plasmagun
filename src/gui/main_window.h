@@ -7,10 +7,15 @@ namespace Plasma {
 
 	class MainWindow : public Window {
 		public:
+		
+			typedef gboolean (MainWindow::*Handler)\
+				(GtkWidget *widget, GdkEvent *event, gpointer data);
 			MainWindow ();
 			MainWindow (const std::string & uiXmlPath);
 			virtual ~MainWindow ();
 		protected:
+			void connectSignal(const std::string & wdg, 
+				const std::string & signal, Handler fun);
 			virtual void connectSignals ();
 
 		private:
