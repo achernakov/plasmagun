@@ -1,8 +1,6 @@
 #pragma once
 
-
 namespace Plasma {
-
 
 	class Window {
 		public:
@@ -34,6 +32,5 @@ namespace Plasma {
 			GtkBuilder * m_builder;
 			std::vector<EventHandler*> m_handlers;
 	};
-	
 	
 }
