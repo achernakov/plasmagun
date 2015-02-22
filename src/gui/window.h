@@ -1,5 +1,7 @@
 #pragma once
 
+#define WINDOW_CALLBACK(FUN) ((Plasma::Window::EventHandlerMethod)(FUN))
+
 namespace Plasma {
 
 	class Window {

@@ -5,6 +5,7 @@ namespace Plasma {
 
 	MainWindow::MainWindow (const std::string & uiXmlPath) :
 			Window(uiXmlPath) {
+		connectSignals();
 	}
 	
 	MainWindow::~MainWindow () {
@@ -12,11 +13,11 @@ namespace Plasma {
 
 	void MainWindow::connectSignals () {
 		registerEventHandler(this->operator[]("main_window"), "delete-event",
-				&MainWindow::on_delete_event, NULL);
+				WINDOW_CALLBACK(&MainWindow::on_delete_event), NULL);
 		registerEventHandler(this->operator[]("main_window"), "destroy", 
-				&MainWindow::on_destroy, NULL);
+				WINDOW_CALLBACK(&MainWindow::on_destroy), NULL);
 		registerEventHandler(this->operator[]("button1"), "clicked",
-				&MainWindow::on_button1_clicked, NULL);
+				WINDOW_CALLBACK(&MainWindow::on_button1_clicked), NULL);
 	}
 	
 //==========================================

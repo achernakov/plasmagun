@@ -50,6 +50,11 @@ namespace Plasma {
 		return GTK_WIDGET(ret);
 	}
 	
-
+	gboolean Window::staticEventHandler(GtkWidget *widget, GdkEvent *event, 
+			gpointer data) {
+		EventHandler * handler = reinterpret_cast<EventHandler*>(data);
+		EventHandlerMethod method = handler->m_handler;
+		(handler->m_this->*method)(widget, event, handler->m_data);
+	}
 
 }
