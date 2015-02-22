@@ -3,10 +3,12 @@
 
 namespace Plasma {
 
-	Window::Window (const std::string & uiXmlPath) {
+	Window::Window (const std::string & uiXmlPath, bool isMain) {
 		loadUiXml(uiXmlPath);
-		g_signal_connect (this->operator[]("main_window"), "destroy",
-			G_CALLBACK(gtk_main_quit), NULL);
+		if (isMain) {
+			g_signal_connect (this->operator[]("main_window"), "destroy",
+				G_CALLBACK(gtk_main_quit), NULL);
+		}
 	}
 
 	void Window::loadUiXml (const std::string & uiXmlPath) {

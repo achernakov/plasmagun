@@ -20,7 +20,7 @@ namespace Plasma {
 			};
 		
 			Window ();
-			Window (const std::string & uiXmlPath);
+			Window (const std::string & uiXmlPath, bool isMain = false);
 			virtual ~Window ();
 			GtkWidget * operator [] (const std::string & widget);
 			void registerEventHandler (GtkWidget *widget, const std::string &event,
