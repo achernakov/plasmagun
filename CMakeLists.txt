@@ -14,3 +14,4 @@ add_definitions(${GTK3_CFLAGS_OTHER})
 add_executable(plasmagun ${SOURCES_LIST})
 target_link_libraries(plasmagun ${GTK3_LIBRARIES})
 
+add_executable(test_plasma src/test_main.cpp src/infiniium/net.cpp)

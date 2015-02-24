@@ -5,6 +5,7 @@
 #include <new>
 #include <vector>
 #include <list>
+#include <iostream>
 
 #include <sys/types.h>
 #include <sys/socket.h>
