@@ -20,12 +20,12 @@ namespace Plasma {
 	
 	void MainWindow::connectSignals () {
 		connectSignal ("main_window",  "delete-event", &MainWindow::on_delete_event);
-		connectSignal ("button1", "clicked", &MainWindow::on_button1_clicked);
+		connectSignal ("request_button", "clicked", &MainWindow::on_button1_clicked);
 	}
 	
-//==========================================
-//============EVENT HANDLERS================
-//==========================================
+	//==========================================
+	//============EVENT HANDLERS================
+	//==========================================
 
 	gboolean MainWindow::on_delete_event (GtkWidget *widget,
 			GdkEvent  *event,
@@ -36,12 +36,11 @@ namespace Plasma {
 
 	gboolean MainWindow::on_button1_clicked (GtkWidget *widget, 
 			GdkEvent  *event, gpointer   data) {
-		gtk_window_set_title(GTK_WINDOW(this->operator[]("main_window")), 
-				gtk_entry_get_text(GTK_ENTRY(operator[]("entry1"))));
-				
 		NetClnt net;
-		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("entry1"))), "http");
-		net.sendString("GET / HTTP/1.0\r\n\r\n");
+		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
+				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
+		//net.sendString("GET / HTTP/1.0\r\n\r\n");
+		net.sendString((std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry")))) + "\n").c_str());
 		std::string resp;
 		net.recvString(resp);
 		g_print(resp.c_str());
