@@ -23,6 +23,15 @@ namespace Plasma {
 		connectSignal ("request_button", "clicked", &MainWindow::on_button1_clicked);
 	}
 	
+	//HELPERS
+
+	void appendText (GtkTextBuffer * buf, const std::string & text) {
+		GtkTextIter iter;
+		gtk_text_buffer_get_end_iter (buf, &iter);
+		gtk_text_buffer_insert (buf, &iter, text.c_str(), -1);
+	}
+	
+	
 	//==========================================
 	//============EVENT HANDLERS================
 	//==========================================
@@ -40,11 +49,20 @@ namespace Plasma {
 		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
 				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
 		//net.sendString("GET / HTTP/1.0\r\n\r\n");
-		net.sendString((std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry")))) + "\n").c_str());
+		std::string cmd = std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry")))) + "\r\n\r\n";
+		//gtk_entry_set_text (GTK_ENTRY(operator[]("command_entry")), "");
+		net.sendString(cmd.c_str());
+		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), cmd);
 		std::string resp;
 		net.recvString(resp);
 		g_print(resp.c_str());
+		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), resp);
 		net.disconnect();
 	}
+
+
+
 	
 }
+
+
