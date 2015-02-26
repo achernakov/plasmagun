@@ -14,7 +14,7 @@ namespace Plasma {
 
 	void MainWindow::connectSignal (const std::string & wdg, 
 			const std::string & signal, Handler fun) {
-		registerEventHandler(this->operator[](wdg.c_str()), signal.c_str(),
+		registerEventHandler(GTK_WIDGET(this->operator[](wdg.c_str())), signal.c_str(),
 				WINDOW_CALLBACK(fun), NULL);
 	}
 	

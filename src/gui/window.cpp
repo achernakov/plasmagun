@@ -43,7 +43,7 @@ namespace Plasma {
 		m_data = ptr;
 	}
 	
-	GtkWidget * Window::operator [] (const std::string & wdgName) {
+	GObject * Window::operator [] (const std::string & wdgName) {
 		if (!m_builder) {
 			throw std::runtime_error("No UI builder instance created");
 		}
@@ -51,7 +51,7 @@ namespace Plasma {
 		if (!ret) {
 			throw std::runtime_error(("Can't get required widget: " + wdgName).c_str());
 		}
-		return GTK_WIDGET(ret);
+		return ret;
 	}
 	
 	gboolean Window::staticEventHandler(GtkWidget *widget, GdkEvent *event, 

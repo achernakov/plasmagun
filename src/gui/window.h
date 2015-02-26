@@ -22,7 +22,7 @@ namespace Plasma {
 			Window ();
 			Window (const std::string & uiXmlPath, bool isMain = false);
 			virtual ~Window ();
-			GtkWidget * operator [] (const std::string & widget);
+			GObject * operator [] (const std::string & widget);
 			void registerEventHandler (GtkWidget *widget, const std::string &event,
 					EventHandlerMethod method, gpointer userData = NULL);
 			static gboolean staticEventHandler (GtkWidget *widget, GdkEvent *event, 
