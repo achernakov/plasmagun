@@ -20,7 +20,7 @@ namespace Plasma {
 	
 	void MainWindow::connectSignals () {
 		connectSignal ("main_window",  "delete-event", &MainWindow::on_delete_event);
-		connectSignal ("request_button", "clicked", &MainWindow::on_button1_clicked);
+		connectSignal ("request_button", "clicked", &MainWindow::on_connect_clicked);
 	}
 	
 	//HELPERS
@@ -43,7 +43,7 @@ namespace Plasma {
 		return FALSE;
 	}
 
-	gboolean MainWindow::on_button1_clicked (GtkWidget *widget, 
+	gboolean MainWindow::on_connect_clicked (GtkWidget *widget, 
 			GdkEvent  *event, gpointer   data) {
 		NetClnt net;
 		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 

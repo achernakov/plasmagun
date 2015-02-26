@@ -1,6 +1,7 @@
 #pragma once
 
 #include "window.h"
+#include "settings_window.h"
 
 namespace Plasma {
 
@@ -17,18 +18,19 @@ namespace Plasma {
 			void connectSignal(const std::string & wdg, 
 				const std::string & signal, Handler fun);
 			virtual void connectSignals ();
-
+			//SettingsWindow settingsWnd;
 		private:
 			gboolean on_delete_event (GtkWidget *widget,
 				GdkEvent  *event,
 				gpointer   data)  ;
 
-		gboolean on_destroy (GtkWidget *widget,
-				GdkEvent  *event,
-				gpointer   data);
+			gboolean on_destroy (GtkWidget *widget,
+					GdkEvent  *event,
+					gpointer   data);
 	
-		gboolean on_button1_clicked (GtkWidget *widget, 
-				GdkEvent  *event, gpointer   data);
+			gboolean on_connect_clicked (GtkWidget *widget, 
+					GdkEvent  *event, gpointer   data);
+
 	};
 	
 	
