@@ -17,6 +17,8 @@ namespace Plasma {
 		protected:
 			void connectSignal(const std::string & wdg, 
 				const std::string & signal, Handler fun);
+			void assignTab (const std::string & box, const std::string & tabLabel);
+			void assignTabs ();
 			virtual void connectSignals ();
 			//SettingsWindow settingsWnd;
 		private:
