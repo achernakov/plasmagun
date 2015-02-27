@@ -24,27 +24,9 @@ namespace Plasma {
 		connectSignal ("request_button", "clicked", &MainWindow::on_connect_clicked);
 	}
 	
-	void MainWindow::assignTab (const std::string & box, const std::string & tabLabel) {
-		GtkNotebook * notebook = GTK_NOTEBOOK(operator[]("main_notebook"));
-		if (!notebook) {
-			throw Plasma::Error("Can't find main_notebook");
-		}
-		gint res = gtk_notebook_append_page (notebook, 
-			GTK_WIDGET(operator[](box.c_str())),
-			GTK_WIDGET(operator[](tabLabel.c_str())));
-		if (res == -1) {
-			throw Plasma::Error (("Failed to attach box " + box + 
-					" or tabLabel " + tabLabel).c_str());
-		}
-	}
-	
-	void MainWindow::assignTabs () {
-		assignTab("command_box", "tab_label_log");
-	}
-	
 	//HELPERS
 
-	void appendText (GtkTextBuffer * buf, const std::string & text) {
+	void MainWindow::appendText (GtkTextBuffer * buf, const std::string & text) {
 		GtkTextIter iter;
 		gtk_text_buffer_get_end_iter (buf, &iter);
 		gtk_text_buffer_insert (buf, &iter, text.c_str(), -1);
