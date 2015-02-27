@@ -3,22 +3,22 @@
 
 #define DEFAULT_NET_BUF ((size_t)(1024 * 10))
 
-NetClnt::NetClnt () :
+Socket::Socket () :
 	m_sock(-1) {
 }
 
-NetClnt::NetClnt (int sock) :
+Socket::Socket (int sock) :
 	m_sock(sock) {
 }
 
-NetClnt::NetClnt (const NetClnt & oth) :
+Socket::Socket (const Socket & oth) :
 	m_sock(oth.m_sock) {
 }
 
-NetClnt::~NetClnt () {
+Socket::~Socket () {
 }
 
-void NetClnt::connect (const std::string & addr, const std::string & port) {
+void Socket::connect (const std::string & addr, const std::string & port) {
 	int ret = socket (AF_INET, SOCK_STREAM, 0);
 	if (ret == -1) {
 		throw Plasma::Error ("Can't create socket");
@@ -49,14 +49,14 @@ void NetClnt::connect (const std::string & addr, const std::string & port) {
 	}	
 }
 
-void NetClnt::disconnect () {
+void Socket::disconnect () {
 	if (m_sock != -1) {
 		close (m_sock);
 		m_sock == -1;
 	} 
 }
 
-void NetClnt::sendString (const std::string & str) {
+void Socket::sendString (const std::string & str) {
 	if (m_sock == -1) {
 		throw Plasma::Error("Failed to send: not connected");
 	}
@@ -74,7 +74,7 @@ void NetClnt::sendString (const std::string & str) {
 	} while (count < len);
 }
 
-void NetClnt::recvString (std::string & str) {
+void Socket::recvString (std::string & str) {
 	if (m_sock == -1) {
 		throw Plasma::Error("Failed to recv: not connected");
 	}

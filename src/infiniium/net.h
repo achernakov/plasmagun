@@ -1,11 +1,11 @@
 #pragma once
 
-class NetClnt {
+class Socket {
 	public:
-		NetClnt ();
-		NetClnt (int sock);
-		NetClnt (const NetClnt & oth);
-		virtual ~NetClnt ();
+		Socket ();
+		Socket (int sock);
+		Socket (const Socket & oth);
+		virtual ~Socket ();
 
 		void connect (const std::string & addr, const std::string & port);
 		void disconnect ();

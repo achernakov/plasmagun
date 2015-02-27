@@ -2,7 +2,7 @@
 #include "infiniium/net.h"
 
 int main (int argc, char ** argv) {
-	NetClnt net;
+	Socket net;
 	net.connect("172.16.13.238", "5025");
 	//net.sendString("*RST\n");
 	net.sendString("*IDN?\n");

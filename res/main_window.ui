@@ -196,7 +196,7 @@
                   <object class="GtkEntry" id="addr_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="text" translatable="yes">google.com</property>
+                    <property name="text" translatable="yes">172.16.13.238</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -220,7 +220,7 @@
                   <object class="GtkEntry" id="port_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="text" translatable="yes">http</property>
+                    <property name="text" translatable="yes">5025</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

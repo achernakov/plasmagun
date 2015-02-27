@@ -64,7 +64,7 @@ namespace Plasma {
 
 	gboolean MainWindow::on_connect_clicked (GtkWidget *widget, 
 			GdkEvent  *event, gpointer   data) {
-		NetClnt net;
+		Socket net;
 		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
 				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
 		//net.sendString("GET / HTTP/1.0\r\n\r\n");
