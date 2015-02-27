@@ -21,7 +21,7 @@ NetClnt::~NetClnt () {
 void NetClnt::connect (const std::string & addr, const std::string & port) {
 	int ret = socket (AF_INET, SOCK_STREAM, 0);
 	if (ret == -1) {
-		throw std::runtime_error ("Can't create socket");
+		throw Plasma::Error ("Can't create socket");
 	}
 	
 	addrinfo hints, *results;
@@ -32,7 +32,7 @@ void NetClnt::connect (const std::string & addr, const std::string & port) {
 
 	ret = getaddrinfo(addr.c_str(), port.c_str(), &hints, &results);
 	if (ret) {
-			throw std::runtime_error (("Can't getaddrinfo(); of " + addr + ":" + port).c_str());
+			throw Plasma::Error (("Can't getaddrinfo(); of " + addr + ":" + port).c_str());
 	}
 	int sfd = -1;	
 	for (addrinfo * rp = results; rp != NULL; rp = rp->ai_next) {
@@ -43,7 +43,7 @@ void NetClnt::connect (const std::string & addr, const std::string & port) {
 			break;                  /* Success */
 	}
 	if (sfd == -1) {
-		throw std::runtime_error (("Can't connect to " + addr + ":" + port).c_str());
+		throw Plasma::Error (("Can't connect to " + addr + ":" + port).c_str());
 	} else {
 		m_sock = sfd;
 	}	
@@ -58,7 +58,7 @@ void NetClnt::disconnect () {
 
 void NetClnt::sendString (const std::string & str) {
 	if (m_sock == -1) {
-		throw std::runtime_error("Failed to send: not connected");
+		throw Plasma::Error("Failed to send: not connected");
 	}
 	
 	
@@ -67,7 +67,7 @@ void NetClnt::sendString (const std::string & str) {
 		int ret = send(m_sock, str.c_str() + count, 
 				std::min(DEFAULT_NET_BUF, len - count), 0);
 		if (ret == -1) {
-			throw std::runtime_error("Failed to send: send(); returned -1");
+			throw Plasma::Error("Failed to send: send(); returned -1");
 		} else {
 			count += ret;
 		}
@@ -76,7 +76,7 @@ void NetClnt::sendString (const std::string & str) {
 
 void NetClnt::recvString (std::string & str) {
 	if (m_sock == -1) {
-		throw std::runtime_error("Failed to recv: not connected");
+		throw Plasma::Error("Failed to recv: not connected");
 	}
 	
 	char buf[DEFAULT_NET_BUF];
@@ -84,7 +84,7 @@ void NetClnt::recvString (std::string & str) {
 	
 	int ret = recv (m_sock, buf, DEFAULT_NET_BUF, 0);
 	if (ret == -1) {
-		throw std::runtime_error("Failed to recv: recv(); returned -1");
+		throw Plasma::Error("Failed to recv: recv(); returned -1");
 	}
 	str = "";
 	str.insert (0, buf, ret);

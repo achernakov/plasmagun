@@ -27,13 +27,13 @@ namespace Plasma {
 	void MainWindow::assignTab (const std::string & box, const std::string & tabLabel) {
 		GtkNotebook * notebook = GTK_NOTEBOOK(operator[]("main_notebook"));
 		if (!notebook) {
-			throw std::runtime_error("Can't find main_notebook");
+			throw Plasma::Error("Can't find main_notebook");
 		}
 		gint res = gtk_notebook_append_page (notebook, 
 			GTK_WIDGET(operator[](box.c_str())),
 			GTK_WIDGET(operator[](tabLabel.c_str())));
 		if (res == -1) {
-			throw std::runtime_error (("Failed to attach box " + box + 
+			throw Plasma::Error (("Failed to attach box " + box + 
 					" or tabLabel " + tabLabel).c_str());
 		}
 	}

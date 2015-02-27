@@ -16,3 +16,4 @@
 
 #include <gtk/gtk.h>
 
+#include "error.h"

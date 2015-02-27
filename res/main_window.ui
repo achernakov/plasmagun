@@ -3,6 +3,7 @@
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkTextBuffer" id="log_buffer"/>
+  <object class="GtkTextBuffer" id="shit_buffer"/>
   <object class="GtkWindow" id="main_window">
     <property name="name">main_window</property>
     <property name="can_focus">False</property>
@@ -12,7 +13,6 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
         <child>
           <object class="GtkMenuBar" id="menubar1">
             <property name="visible">True</property>
@@ -174,6 +174,7 @@
           <object class="GtkBox" id="box2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="spacing">2</property>
             <child>
               <object class="GtkBox" id="box3">
                 <property name="visible">True</property>
@@ -396,6 +397,7 @@
                   <object class="GtkTextView" id="textview1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="buffer">shit_buffer</property>
                   </object>
                   <packing>
                     <property name="position">2</property>

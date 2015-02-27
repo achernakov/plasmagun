@@ -14,11 +14,11 @@ namespace Plasma {
 	void Window::loadUiXml (const std::string & uiXmlPath) {
 		m_builder = gtk_builder_new ();
 		if (!m_builder) {
-			throw std::runtime_error("Can't create XML loader");
+			throw Plasma::Error("Can't create XML loader");
 		}
 		guint err = gtk_builder_add_from_file (m_builder, uiXmlPath.c_str(), NULL);
 		if (!err) {
-			throw std::runtime_error("Can't load widgets XML");
+			throw Plasma::Error("Can't load widgets XML");
 		}
 	}
 	
@@ -45,11 +45,11 @@ namespace Plasma {
 	
 	GObject * Window::operator [] (const std::string & wdgName) {
 		if (!m_builder) {
-			throw std::runtime_error("No UI builder instance created");
+			throw Plasma::Error("No UI builder instance created");
 		}
 		GObject * ret = gtk_builder_get_object(m_builder, wdgName.c_str());
 		if (!ret) {
-			throw std::runtime_error(("Can't get required widget: " + wdgName).c_str());
+			throw Plasma::Error(("Can't get required widget: " + wdgName).c_str());
 		}
 		return ret;
 	}
