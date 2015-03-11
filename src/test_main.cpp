@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "infiniium/socket.h"
-#include "infiniium/connection.h"
+#include "net/socket.h"
+#include "net/connection.h"
 
 
 int main (int argc, char ** argv) {

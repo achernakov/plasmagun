@@ -1,6 +1,6 @@
 #pragma once
 
-#include "connection.h"
+#include "../net/connection.h"
 
 namespace Plasma {
 

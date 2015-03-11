@@ -1,7 +1,7 @@
-set (SOURCES_LIST src/main.cpp src/infiniium/socket.cpp
+set (SOURCES_LIST src/main.cpp src/net/socket.cpp
 		src/gui/window.cpp src/gui/main_window.cpp 
-		src/infiniium/connection.cpp src/infiniium/infiniium_connection.cpp
-		src/gui/oscope_conn.cpp)
+		src/net/connection.cpp src/infiniium/infiniium_connection.cpp
+		src/gui/oscope_conn.cpp src/infiniium/infiniium_proto.cpp)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--export-dynamic -rdynamic")
 project(plasmagun)
 cmake_minimum_required(VERSION 2.6)
@@ -16,4 +16,4 @@ add_definitions(${GTK3_CFLAGS_OTHER})
 add_executable(plasmagun ${SOURCES_LIST})
 target_link_libraries(plasmagun ${GTK3_LIBRARIES})
 
-add_executable(test_plasma src/test_main.cpp src/infiniium/socket.cpp)
+add_executable(test_plasma src/test_main.cpp src/net/socket.cpp)
