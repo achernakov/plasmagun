@@ -14,6 +14,12 @@ namespace Plasma {
 			MainWindow ();
 			MainWindow (const std::string & uiXmlPath);
 			virtual ~MainWindow ();
+			
+			
+			//EXTERNAL EVENT HANDLERS
+			
+			void onConnect ();
+			void onDisconnect ();
 		protected:
 			void connectSignal(const std::string & wdg, 
 				const std::string & signal, Handler fun);
@@ -34,7 +40,7 @@ namespace Plasma {
 	
 			gboolean on_connect_clicked (GtkWidget *widget, 
 					GdkEvent  *event, gpointer   data);
-
+					
 	};
 	
 	

@@ -1,5 +1,6 @@
 #include "../stdafx.h"
 #include "oscope_conn.h"
+#include "main_window.h"
 
 namespace Plasma {
 
@@ -14,6 +15,7 @@ namespace Plasma {
 	void OscopeConn::onConnect (const std::string & addr, 
 			const std::string & port) {	
 		g_print ("[OSCOPE] Connected\n");
+		//m_wnd.onConnect ();
 	}
 
 

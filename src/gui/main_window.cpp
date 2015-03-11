@@ -11,6 +11,9 @@ namespace Plasma {
 	}
 	
 	MainWindow::~MainWindow () {
+		if (m_oscopeConn.status() == Plasma::Connection::CONNECTED) {
+			m_oscopeConn.disconnect();
+		}
 	}
 
 	void MainWindow::connectSignal (const std::string & wdg, 
@@ -61,9 +64,10 @@ namespace Plasma {
 		net.disconnect();*/
 
 
-
-		m_oscopeConn.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
-				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
+		if (m_oscopeConn.status() == Plasma::Connection::DISCONNECTED) {
+			m_oscopeConn.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
+					gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
+		}
 		//m_oscopeConn.sendString("GET / HTTP/1.0\r\n\r\n");
 		std::string cmd = std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry")))) + "\r\n\r\n";
 		//gtk_entry_set_text (GTK_ENTRY(operator[]("command_entry")), "");
@@ -73,7 +77,14 @@ namespace Plasma {
 		m_oscopeConn.recvString(resp);
 		g_print(resp.c_str());
 		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), resp);
-		m_oscopeConn.disconnect();
+	}
+	
+	void MainWindow::onConnect () {
+		gtk_switch_set_state (GTK_SWITCH(operator[]("connect_switch")), TRUE);
+	}
+	
+	void MainWindow::onDisconnect () {
+		gtk_switch_set_state (GTK_SWITCH(operator[]("connect_switch")), FALSE);
 	}
 
 
