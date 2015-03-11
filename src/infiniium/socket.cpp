@@ -1,5 +1,5 @@
 #include "../stdafx.h"
-#include "net.h"
+#include "socket.h"
 
 #define DEFAULT_NET_BUF ((size_t)(1024 * 10))
 
@@ -56,6 +56,30 @@ void Socket::disconnect () {
 	} 
 }
 
+size_t Socket::send (const char * data, size_t size) {
+	if (m_sock == -1) {
+		throw Plasma::Error("Failed to send: not connected");
+	}
+
+	int ret = ::send(m_sock, data, size, 0);
+	if (ret == -1) {
+		throw Plasma::Error("Failed to send: send(); returned -1");
+	}
+	return (size_t) ret;
+}
+
+size_t Socket::recv (char * data, size_t size) {
+	if (m_sock == -1) {
+		throw Plasma::Error("Failed to recv: not connected");
+	}
+
+	int ret = ::recv(m_sock, data, size, 0);
+	if (ret == -1) {
+		throw Plasma::Error("Failed to send: recv(); returned -1");
+	}
+	return (size_t) ret;
+}
+
 void Socket::sendString (const std::string & str) {
 	if (m_sock == -1) {
 		throw Plasma::Error("Failed to send: not connected");
@@ -64,7 +88,7 @@ void Socket::sendString (const std::string & str) {
 	
 	size_t count = 0, len = str.size();
 	do {
-		int ret = send(m_sock, str.c_str() + count, 
+		int ret = ::send(m_sock, str.c_str() + count, 
 				std::min(DEFAULT_NET_BUF, len - count), 0);
 		if (ret == -1) {
 			throw Plasma::Error("Failed to send: send(); returned -1");
@@ -82,7 +106,7 @@ void Socket::recvString (std::string & str) {
 	char buf[DEFAULT_NET_BUF];
 	size_t count = 0;
 	
-	int ret = recv (m_sock, buf, DEFAULT_NET_BUF, 0);
+	int ret = ::recv (m_sock, buf, DEFAULT_NET_BUF, 0);
 	if (ret == -1) {
 		throw Plasma::Error("Failed to recv: recv(); returned -1");
 	}

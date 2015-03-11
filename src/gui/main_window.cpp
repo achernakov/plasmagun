@@ -1,11 +1,11 @@
 #include "../stdafx.h"
-#include "../infiniium/net.h"
+#include "../infiniium/socket.h"
 #include "main_window.h"
 
 namespace Plasma {
 
 	MainWindow::MainWindow (const std::string & uiXmlPath) :
-			Window(uiXmlPath, true) {
+			Window(uiXmlPath, true), m_oscopeConn(*this) {
 		connectSignals();
 		//assignTabs();
 	}
@@ -46,7 +46,7 @@ namespace Plasma {
 
 	gboolean MainWindow::on_connect_clicked (GtkWidget *widget, 
 			GdkEvent  *event, gpointer   data) {
-		Socket net;
+/*		Socket net;
 		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
 				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
 		//net.sendString("GET / HTTP/1.0\r\n\r\n");
@@ -58,7 +58,22 @@ namespace Plasma {
 		net.recvString(resp);
 		g_print(resp.c_str());
 		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), resp);
-		net.disconnect();
+		net.disconnect();*/
+
+
+
+		m_oscopeConn.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
+				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
+		//m_oscopeConn.sendString("GET / HTTP/1.0\r\n\r\n");
+		std::string cmd = std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry")))) + "\r\n\r\n";
+		//gtk_entry_set_text (GTK_ENTRY(operator[]("command_entry")), "");
+		m_oscopeConn.sendString(cmd.c_str());
+		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), cmd);
+		std::string resp;
+		m_oscopeConn.recvString(resp);
+		g_print(resp.c_str());
+		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), resp);
+		m_oscopeConn.disconnect();
 	}
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "window.h"
-#include "settings_window.h"
+#include "oscope_conn.h"
 
 namespace Plasma {
 
@@ -20,6 +20,9 @@ namespace Plasma {
 			virtual void connectSignals ();
 			//SettingsWindow settingsWnd;
 			static void appendText (GtkTextBuffer * buffer, const std::string & text);
+			
+			OscopeConn m_oscopeConn;
+
 		private:
 			gboolean on_delete_event (GtkWidget *widget,
 				GdkEvent  *event,

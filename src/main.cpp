@@ -1,6 +1,6 @@
 
 #include "stdafx.h"
-#include "infiniium/net.h"
+#include "infiniium/socket.h"
 #include "gui/main_window.h"
 
 
