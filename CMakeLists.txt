@@ -2,7 +2,7 @@ set (SOURCES_LIST src/main.cpp src/net/socket.cpp
 		src/gui/window.cpp src/gui/main_window.cpp 
 		src/net/connection.cpp src/infiniium/infiniium_connection.cpp
 		src/gui/oscope_conn.cpp src/infiniium/infiniium_proto.cpp)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--export-dynamic -rdynamic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--export-dynamic -rdynamic -std=c++11 -pthread")
 project(plasmagun)
 cmake_minimum_required(VERSION 2.6)
 find_package(PkgConfig REQUIRED)

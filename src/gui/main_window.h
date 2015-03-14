@@ -15,7 +15,6 @@ namespace Plasma {
 			MainWindow (const std::string & uiXmlPath);
 			virtual ~MainWindow ();
 			
-			
 			//EXTERNAL EVENT HANDLERS
 			
 			void onConnect ();

@@ -50,40 +50,31 @@ namespace Plasma {
 
 	gboolean MainWindow::on_connect_clicked (GtkWidget *widget, 
 			GdkEvent  *event, gpointer   data) {
-/*		Socket net;
-		net.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
-				gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
-		//net.sendString("GET / HTTP/1.0\r\n\r\n");
-		std::string cmd = std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry")))) + "\r\n\r\n";
-		//gtk_entry_set_text (GTK_ENTRY(operator[]("command_entry")), "");
-		net.sendString(cmd.c_str());
-		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), cmd);
-		std::string resp;
-		net.recvString(resp);
-		g_print(resp.c_str());
-		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), resp);
-		net.disconnect();*/
-
-		
-		
 		
 		if (m_oscopeConn.status() == Plasma::Connection::DISCONNECTED) {
 			m_oscopeConn.connect(gtk_entry_get_text(GTK_ENTRY(operator[]("addr_entry"))), 
 					gtk_entry_get_text(GTK_ENTRY(operator[]("port_entry"))));
 		}
-		//m_oscopeConn.sendString("GET / HTTP/1.0\r\n\r\n");
-		std::string cmd = std::string(gtk_entry_get_text(GTK_ENTRY(operator[]("command_entry"))));
+		
+		std::string cmd = std::string( gtk_entry_get_text (GTK_ENTRY( operator[]("command_entry" ))));
 		Plasma::InfiniiumProtocol::CommType type = Plasma::InfiniiumProtocol::getCommType (cmd);
-		cmd += "\r\n\r\n";
+		
+		
+		//cmd += "\r\n\r\n";
 		//gtk_entry_set_text (GTK_ENTRY(operator[]("command_entry")), "");
-		m_oscopeConn.sendString(cmd.c_str());
-		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), cmd);
+		
+		
+		//m_oscopeConn.sendString(cmd.c_str());
+		appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), cmd+"\n\n");
 
 		if (type == Plasma::InfiniiumProtocol::STR_REQUEST) {
 			std::string resp;
-			m_oscopeConn.recvString(resp);
+			//m_oscopeConn.recvString(resp);
+			m_oscopeConn.stringRequest(cmd, resp);
 			g_print(resp.c_str());
 			appendText(GTK_TEXT_BUFFER(operator[]("log_buffer")), resp);
+		} else {
+			m_oscopeConn.command(cmd);
 		}
 	}
 	

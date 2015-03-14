@@ -12,14 +12,16 @@ namespace Plasma {
 			OscopeConn (MainWindow & mainWnd);
 			virtual ~OscopeConn ();
 			
+			void operator () ();
+			
 			virtual void onConnect (const std::string & addr, 
-					const std::string & port);
+					const std::string & port) override;
 			virtual void onFailedConnect (const std::string & addr,
-					const std::string & port);
-			virtual void onSend ();
-			virtual void onRecv ();
-			virtual void onDisconnect ();
-			virtual void onRemoteClosed ();
+					const std::string & port) override;
+			virtual void onSend () override;
+			virtual void onRecv () override;
+			virtual void onDisconnect () override;
+			virtual void onRemoteClosed () override;
 
 		protected:
 			MainWindow & m_wnd;

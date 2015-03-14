@@ -15,11 +15,7 @@ namespace Plasma {
 			void connect (const std::string & addr, const std::string & port);
 			void disconnect ();
 			Status status ();
-			
-			size_t send (const char * data, size_t size);
-			size_t recv (char * data, size_t size);
-			void sendString (const std::string & str);
-			void recvString (std::string & str);
+		
 
 			virtual void onConnect (const std::string & addr, 
 					const std::string & port) = 0;
@@ -32,6 +28,11 @@ namespace Plasma {
 		protected:
 			Socket m_sock;
 			Status m_stat;
+
+			size_t send (const char * data, size_t size);
+			size_t recv (char * data, size_t size);
+			void sendString (const std::string & str);
+			void recvString (std::string & str);
 		private:
 	};
 

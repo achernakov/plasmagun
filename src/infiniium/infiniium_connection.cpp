@@ -23,12 +23,12 @@ namespace Plasma {
 	}
 	
 	void InfiniiumConnection::command (const std::string & cmd) {
-		sendString (cmd);
+		sendString (cmd + "\n");
 	}
 	
 	void InfiniiumConnection::stringRequest (const std::string & req, 
 			std::string & resp) {
-		sendString (req);
+		sendString (req + "\n");
 		recvString (resp);
 	};
 

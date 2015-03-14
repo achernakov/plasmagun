@@ -15,7 +15,7 @@ namespace Plasma {
 	void OscopeConn::onConnect (const std::string & addr, 
 			const std::string & port) {	
 		g_print ("[OSCOPE] Connected\n");
-		//m_wnd.onConnect ();
+		m_wnd.onConnect ();
 	}
 
 
@@ -37,6 +37,7 @@ namespace Plasma {
 
 	void OscopeConn::onDisconnect () {
 		g_print ("[OSCOPE] Disconnected\n");
+		m_wnd.onDisconnect();
 	}
 
 
@@ -45,7 +46,9 @@ namespace Plasma {
 	}
 
 
-
+	void OscopeConn::operator () () {
+		g_print ("[OSCOPE] Called separate thread\n");
+	}
 
 
 }
