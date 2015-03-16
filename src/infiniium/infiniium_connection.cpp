@@ -31,5 +31,23 @@ namespace Plasma {
 		sendString (req + "\n");
 		recvString (resp);
 	};
+	
+	void InfiniiumConnection::getWfData (std::string & data) {
+		char buf[PLASMA_INFINIIUM_BUF_SIZE];
+		
+		bool gotAllData = false;
+		
+		data.clear();
+		
+		do {
+			size_t size = recv(buf, PLASMA_INFINIIUM_BUF_SIZE-1);
+			for (size_t i = 0; i < size; i++) {
+				if (buf[i] == '\n')
+					gotAllData = true; 
+			}
+			//m_respData.insert(m_respData.end(), buf, buf + size);
+			data.append(buf, size);
+		} while (!gotAllData);
+	} 
 
 }

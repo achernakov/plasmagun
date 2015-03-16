@@ -39,6 +39,10 @@ namespace Plasma {
 	
 			gboolean on_connect_clicked (GtkWidget *widget, 
 					GdkEvent  *event, gpointer   data);
+
+
+			gboolean on_csv_export_button (GtkWidget *widget, 
+					GdkEvent  *event, gpointer   data);
 					
 	};
 	

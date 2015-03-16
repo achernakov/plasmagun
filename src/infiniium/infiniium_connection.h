@@ -19,6 +19,8 @@ namespace Plasma {
 			void command (const std::string & cmd);
 			void stringRequest (const std::string & req, std::string & resp);
 			
+			void getWfData (std::string & data);
+			
 		protected:
 			std::vector<char> m_respData;
 		private:
