@@ -27,6 +27,11 @@ namespace Plasma {
 			static void appendText (GtkTextBuffer * buffer, const std::string & text);
 			
 			OscopeConn m_oscopeConn;
+			
+			std::string digitizeCommand (bool ch1, bool ch2, bool ch3, bool ch4);
+			bool getCbState (const std::string & cbId);
+			
+			void doDataAcquisition ();
 
 		private:
 			gboolean on_delete_event (GtkWidget *widget,
@@ -40,9 +45,19 @@ namespace Plasma {
 			gboolean on_connect_clicked (GtkWidget *widget, 
 					GdkEvent  *event, gpointer   data);
 
+			gboolean on_start_analysis_clicked (GtkWidget *widget, 
+					GdkEvent  *event, gpointer   data);
+
 
 			gboolean on_csv_export_button (GtkWidget *widget, 
 					GdkEvent  *event, gpointer   data);
+					
+					
+			void writeDataToFile (const std::string & path, const std::vector<int16_t> & data);
+			void writeDataToFile (const std::string & path, const std::vector<int16_t> & data, 
+					double yIncr, double yOrigin);
+			void writeDataToFile (const std::string & path, const std::vector<int16_t> & data, 
+					double yIncr, double yOrigin, double timeScale);
 					
 	};
 	
