@@ -2,14 +2,14 @@
 
 namespace Plasma {
 
-	enum ErrorType {ERR_NET, ERR_PROTO, ERR_DATA, ERR_UNKNOWN};
-	enum ErrorLevel {ERROR, WARNING};
+	enum ErrorType {PL_ERR_NET, PL_ERR_PROTO, PL_ERR_DATA, PL_ERR_UNKNOWN};
+	enum ErrorLevel {PL_ERROR, PL_WARNING};
 
 	class Error : public std::exception {
 		public:
 			Error();
-			Error (const std::string & err, ErrorLevel level = ERROR, 
-					ErrorType type = ERR_UNKNOWN) throw() :
+			Error (const std::string & err, ErrorLevel level = PL_ERROR, 
+					ErrorType type = PL_ERR_UNKNOWN) throw() :
 					m_type(type), m_level(level), m_what(err) {
 			};
 			virtual ~Error() throw() {

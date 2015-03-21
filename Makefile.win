@@ -1,0 +1,24 @@
+#Windows makefile
+
+CFLAGS=`pkg-config --libs gtk+-win32-3.0`
+
+LIBS=`pkg-config --libs gtk+-win32-3.0`
+
+FLAGS=-std=c++11 -pthread -Wl,--export-all-symbol -mwindows -mms-bitfields
+
+SOURCES=src/main.cpp src/net/socket.cpp src/gui/window.cpp src/gui/main_window.cpp src/net/connection.cpp src/infiniium/infiniium_connection.cpp src/gui/oscope_conn.cpp src/infiniium/infiniium_proto.cpp
+
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=plasmagun.exe
+CXX=i686-w64-mingw32-c++
+
+all: $(SOURCES) $(EXCUTABLE)
+$(EXECUTABLE): $(OBJECTS)
+	$(CXX) -g -o $@ $(OBJECTS) $(FLAGS) $(LIBS)
+.cpp.o:
+	$(CXX) -g $(FLAGS) $(CFLAGS) $< -o $@
+
+
+brutal:
+	i686-w64-mingw32-c++ -g -o plasmagun.exe $(SOURCES) $(FLAGS) -mms-bitfields -I/usr/i686-w64-mingw32/sys-root/mingw/include/gtk-3.0 -I/usr/i686-w64-mingw32/sys-root/mingw/include/cairo -I/usr/i686-w64-mingw32/sys-root/mingw/include/pango-1.0 -I/usr/i686-w64-mingw32/sys-root/mingw/include/harfbuzz -I/usr/i686-w64-mingw32/sys-root/mingw/include/pango-1.0 -I/usr/i686-w64-mingw32/sys-root/mingw/include/atk-1.0 -I/usr/i686-w64-mingw32/sys-root/mingw/include/cairo -I/usr/i686-w64-mingw32/sys-root/mingw/include/pixman-1 -I/usr/i686-w64-mingw32/sys-root/mingw/include -I/usr/i686-w64-mingw32/sys-root/mingw/include/freetype2 -I/usr/i686-w64-mingw32/sys-root/mingw/include -I/usr/i686-w64-mingw32/sys-root/mingw/include/libpng16 -I/usr/i686-w64-mingw32/sys-root/mingw/include -I/usr/i686-w64-mingw32/sys-root/mingw/include/freetype2 -I/usr/i686-w64-mingw32/sys-root/mingw/include -I/usr/i686-w64-mingw32/sys-root/mingw/include/libpng16 -I/usr/i686-w64-mingw32/sys-root/mingw/include/gdk-pixbuf-2.0 -I/usr/i686-w64-mingw32/sys-root/mingw/include/libpng16 -I/usr/i686-w64-mingw32/sys-root/mingw/include/glib-2.0 -I/usr/i686-w64-mingw32/sys-root/mingw/lib/glib-2.0/include -L/usr/i686-w64-mingw32/sys-root/mingw/lib -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lwinmm -lpangocairo-1.0 -lpangoft2-1.0 -lfontconfig -lfreetype -lpangowin32-1.0 -lgdi32 -lpango-1.0 -lm -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl -lws2_32
+
