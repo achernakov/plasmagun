@@ -18,6 +18,7 @@ namespace Plasma {
 			m_sock.connect(addr, port);
 		} catch (const Plasma::Error & ex) {
 			success = false;
+			throw;
 		}
 		if (success) {
 			m_stat = Plasma::Connection::CONNECTED;

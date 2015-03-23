@@ -352,7 +352,7 @@
                               <object class="GtkEntry" id="acquisition_range_entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="text" translatable="yes">5.00E-3</property>
+                                <property name="text" translatable="yes">5.00E-5</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -363,7 +363,7 @@
                               <object class="GtkEntry" id="sampling_rate_entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="text" translatable="yes">1.00E+5</property>
+                                <property name="text" translatable="yes">1.00E+8</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -529,7 +529,7 @@
                               <object class="GtkEntry" id="addr_entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="text" translatable="yes">172.16.13.238</property>
+                                <property name="text" translatable="yes">192.168.0.101</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>

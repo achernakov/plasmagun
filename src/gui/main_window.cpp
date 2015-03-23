@@ -96,7 +96,17 @@ namespace Plasma {
 	}
 
 
-	void MainWindow::doDataAcquisition () {
+	void MainWindow::doDataAcquisition () {\
+		std::stringstream ss1, ss2;
+		std::string acqRangeStringStr = gtk_entry_get_text(GTK_ENTRY(operator[]("acquisition_range_entry")));
+		std::string acqSamplingRateStr = gtk_entry_get_text(GTK_ENTRY(operator[]("sampling_rate_entry")));
+		double acqRange, acqSRate;
+		ss1 << acqRangeStringStr;
+		ss1 >> acqRange;
+		g_print ("ACQUIRE RANGE: %f\n", acqRange);
+		ss2 << acqSamplingRateStr;
+		ss2 >> acqSRate;
+		g_print ("ACQUIRE SRATE: %f\n", acqSRate);
 		m_oscopeConn.command("*RST");
 		m_oscopeConn.command(":SYSTEM:HEADER OFF");
 
@@ -105,12 +115,12 @@ namespace Plasma {
 		m_oscopeConn.command(":ACQUIRE:AVERAGE OFF");
 
 		m_oscopeConn.command(std::string(":TIMEBASE:RANGE ") + 
-				gtk_entry_get_text(GTK_ENTRY(operator[]("acquisition_range_entry"))));
+				acqRangeStringStr);
 
 		m_oscopeConn.command(":ACQUIRE:POINTS:AUTO ON");
 		m_oscopeConn.command(":ACQUIRE:SRATE:AUTO OFF");
 		m_oscopeConn.command(std::string(":ACQUIRE:SRATE ") + 
-				gtk_entry_get_text(GTK_ENTRY(operator[]("sampling_rate_entry"))));
+				acqSamplingRateStr);
 
 		m_oscopeConn.command(":WAVEFORM:BYTEORDER LSBFIRST");
 		m_oscopeConn.command(":WAVEFORM:FORMAT WORD");
@@ -134,6 +144,7 @@ namespace Plasma {
 				m_oscopeConn.command((chSelector + no).c_str());
 				m_oscopeConn.command(":WAVEFORM:DATA?");
 				m_oscopeConn.getWordData(data);
+				data.erase(data.begin()+(int)(acqRange * acqSRate), data.end());
 				m_oscopeConn.getTypedParam(":WAVEFORM:YINCREMENT?", yIncr);
 				m_oscopeConn.getTypedParam(":WAVEFORM:YORIGIN?", yOrigin);
 				m_oscopeConn.getTypedParam(":WAVEFORM:XINCREMENT?", timeScale);
