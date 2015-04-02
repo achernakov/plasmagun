@@ -162,6 +162,7 @@ namespace Plasma {
 		}
 		
 		g_print("\n");
+		
 	}
 
 	gboolean MainWindow::on_start_analysis_clicked (GtkWidget *widget, 
@@ -182,7 +183,6 @@ namespace Plasma {
 			
 			m_oscopeConn.disconnect();
 		}
-
 	}
 
 	
