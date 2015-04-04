@@ -40,7 +40,7 @@ namespace Plasma {
 				std::string strResp;
 				stringRequest (cmd, strResp);
 				std::stringstream buff(strResp);
-				g_print(strResp.c_str());
+				//g_print(strResp.c_str());
 				buff >> response;
 			}
 

@@ -136,7 +136,7 @@ namespace Plasma {
 			std::stringstream ss;
 			ss << chanNo;
 			std::string no, chSelector(":WAVEFORM:SOURCE CHANNEL"), 
-					fileSelector("/home/user/PlasmaGun/chan"), fileExtension(".csv");
+					fileSelector("/home/sptech/PlasmaGun/chan"), fileExtension(".csv");
 			ss >> no;
 			
 			if (getCbState("cb_chan" + no)) {

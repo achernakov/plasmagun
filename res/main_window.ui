@@ -529,7 +529,7 @@
                               <object class="GtkEntry" id="addr_entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="text" translatable="yes">192.168.0.101</property>
+                                <property name="text" translatable="yes">172.16.13.238</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
